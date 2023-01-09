@@ -1,5 +1,8 @@
+package ru.netology.javaqa.manager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.javaqa.domain.Product;
+import ru.netology.javaqa.repository.ProductRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 

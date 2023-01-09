@@ -1,3 +1,4 @@
+package ru.netology.javaqa.domain;
 public class Smartphone extends Product {
     private String brand;
 

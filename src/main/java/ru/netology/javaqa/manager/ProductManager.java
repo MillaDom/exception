@@ -1,3 +1,7 @@
+package ru.netology.javaqa.manager;
+import ru.netology.javaqa.domain.Product;
+import ru.netology.javaqa.repository.ProductRepository;
+
 public class ProductManager {
 
     private ProductRepository repository;
