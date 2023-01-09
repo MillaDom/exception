@@ -1,7 +1,9 @@
 package ru.netology.javaqa.repository;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.javaqa.domain.AlreadyExistsException;
 import ru.netology.javaqa.domain.NotFoundException;
 import ru.netology.javaqa.domain.Product;
 import ru.netology.javaqa.repository.ProductRepository;
@@ -29,12 +31,17 @@ public class ProductRepositoryTest {
 
 
     @Test
-    public void shouldSaveAll() {
+    public void shouldAddAll() {
 
         Product[] expected = {product1, product2, product3, product4, product5};
         Product[] actual = repository.findAll();
 
         assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotAddExistingId() {
+        assertThrows(AlreadyExistsException.class, () -> repository.save(product4));
     }
 
     @Test
@@ -54,27 +61,23 @@ public class ProductRepositoryTest {
         assertThrows(NotFoundException.class, () -> repository.removeById(555));
     }
 
+
+    @Test
+    public void shouldFindById() {
+
+        Product expected = product3;
+        int id = 123;
+        assertEquals(expected, repository.findById(id));
+    }
+
+    @Test
+    public void couldNotFindById() {
+
+        int id = 555;
+
+        Product expected = null;
+        Product actual = repository.findById(id);
+
+       assertEquals(expected, actual);
+    }
 }
-
-
-//    @Test
-//    public void shouldFindById() {
-//
-//        repository.findById(product2.getId());
-//
-//        Product[] expected = {product2};
-//        Product[] actual = repository.findAll();
-//
-//        assertArrayEquals(expected, actual);
-//    }
-//
-//    @Test
-//    public void couldNotFindById() {
-//
-//        repository.findById(555);
-//
-//        Product[] expected = {};
-//        Product[] actual = repository.findAll();
-//
-//        assertArrayEquals(expected, actual);
-//    }
